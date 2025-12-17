@@ -11,7 +11,6 @@
     <style>
         /* ------------------------------------------------------------------------------------
            CSS: التنسيقات العامة والمحسنة
-           (تم الإبقاء على نفس التنسيقات التي أرسلتها مع إضافة زر الحذف فقط)
            ------------------------------------------------------------------------------------ */
         :root {
             --primary-color: #FF0050; 
@@ -165,7 +164,7 @@
 
         /* تحسين أزرار الإضافة والتواصل والمشاكل داخل Sidebar */
         .sidebar-action-btn {
-            margin: 15px 20px 5px; /* تم تقليل المسافة السفلية قليلاً */
+            margin: 15px 20px 5px; 
             padding: 12px;
             border-radius: 8px;
             text-align: center;
@@ -181,18 +180,6 @@
              margin-inline-end: 8px;
         }
         
-        /* زر تصدير البيانات المُضاف حديثاً */
-        #exportDataBtn.tertiary-btn {
-            background-color: #8e44ad; /* لون بنفسجي جذاب */
-            color: var(--white-color);
-            margin: 5px 20px;
-        }
-        #exportDataBtn.tertiary-btn:hover {
-            background-color: #9b59b6;
-            transform: scale(1.02);
-        }
-
-
         #contactBtn.secondary-btn {
             background-color: var(--contact-color);
             color: var(--white-color);
@@ -207,6 +194,7 @@
             margin-top: 15px;
             background-color: var(--primary-color);
             color: var(--white-color);
+            margin-bottom: 20px;
         }
 
         #addProductBtn.primary-btn:hover {
@@ -734,27 +722,12 @@
             width: 40px; 
             padding: 8px 0; 
         }
-        /* 🚨 زر الحذف الجديد 🚨 */
-        .product-actions .delete-product-btn {
-            background-color: var(--error-color); 
-            color: var(--white-color);
-            flex-grow: 0; 
-            width: 40px; 
-            padding: 8px 0;
-            box-shadow: 0 2px 5px rgba(220, 53, 69, 0.4);
-            display: none; /* إخفاؤه مبدئياً */
-        }
-        .product-actions .delete-product-btn:hover {
-            background-color: #c82333;
-        }
-        /* 🚨 نهاية زر الحذف الجديد 🚨 */
 
         .product-actions .buy-now-btn i,
         .product-actions .show-images-btn i {
              margin-inline-end: 5px; 
         }
-        .product-actions .share-product-btn-footer i,
-        .product-actions .delete-product-btn i { margin: 0; }
+        .product-actions .share-product-btn-footer i { margin: 0; }
         
         /* ------------------- شريط رابط المنتج العائم (Copy Link Bar) ------------------- */
         .link-input-container {
@@ -780,7 +753,7 @@
             padding: 6px;
             margin-inline-end: 10px;
             border: 1px solid #444; 
-            border-radius: 6px;
+            border-radius: 6mm;
             font-size: 0.8em;
             color: #fff;
             background-color: #222;
@@ -866,8 +839,6 @@
             <span class="sidebar-status" id="sidebarStatus">وضع الإدارة</span>
         </div>
         
-        <button id="exportDataBtn" class="sidebar-action-btn tertiary-btn" title="اطبع بيانات LocalStorage في Console"><i class="fas fa-file-export"></i> <span id="exportDataText">تصدير بيانات المتجر</span></button>
-
         <button id="addProductBtn" aria-controls="addProductModal" class="sidebar-action-btn primary-btn"><i class="fas fa-plus-circle"></i> <span id="addProductText">إضافة منتج جديد</span></button>
         
         <h4 class="sidebar-title" id="categoriesTitle">تصفح الفئات:</h4>
@@ -1019,8 +990,7 @@
         const CONTACT_EMAIL = 'wiom9447@gmail.com'; // 📧 بريدك الإلكتروني المستهدف
 
 
-        // 👈 **بيانات المنتجات الأصلية والثابتة** (قم بتحديث هذه القائمة بالبيانات الجديدة المنسوخة من Console)
-        // ** ملاحظة هامة: هذه البيانات الثابتة هي مصدر المنتجات للمتصفحات الجديدة **
+        // 👈 **بيانات المنتجات الأصلية والثابتة** (مصدر المنتجات الأساسي)
         const ORIGINAL_PRODUCTS_DATA = [
 { 
     id: 129, category: 'بدلة اطفال',
@@ -1040,7 +1010,7 @@
     badgeYellow_en: 'Free Shipping', 
     badgeBlack_ar: 'جودة قطنية', 
     badgeBlack_en: 'Cotton Quality', 
-    images: ['https://i.imgur.com/dhNWmlB.jpeg'] 
+    images: ['https://i.imgur.com/dhNWmlB.jpeg', 'https://s.click.aliexpress.com/e/_EyIKaaG'] 
 },
 { 
     id: 130, category: 'فساتين',
@@ -1060,7 +1030,7 @@
     badgeYellow_en: 'Bestseller', 
     badgeBlack_ar: 'عرض محدود', 
     badgeBlack_en: 'Limited Offer', 
-    images: ['https://i.imgur.com/nWcGYVq.jpeg'] 
+    images: ['https://i.imgur.com/nWcGYVq.jpeg', 'https://s.click.aliexpress.com/e/_EyajuQM'] 
 },
 { 
     id: 131, category: 'احذية',
@@ -1080,7 +1050,7 @@
     badgeYellow_en: 'Choice', 
     badgeBlack_ar: 'مريح جداً', 
     badgeBlack_en: 'Very Comfortable', 
-    images: ['https://i.imgur.com/YbyQpLs.jpeg'] 
+    images: ['https://i.imgur.com/YbyQpLs.jpeg', 'https://s.click.aliexpress.com/e/_Ez7L3Io'] 
 },
 { 
     id: 132, category: 'جاكيت',
@@ -1100,7 +1070,7 @@
     badgeYellow_en: 'Limited Offer', 
     badgeBlack_ar: 'ألوان جذابة', 
     badgeBlack_en: 'Attractive Colors', 
-    images: ['https://i.imgur.com/v9xUpZo.jpeg'] 
+    images: ['https://i.imgur.com/v9xUpZo.jpeg', 'https://s.click.aliexpress.com/e/_EylKBFi'] 
 },
 { 
     id: 139, category: 'ساعات',
@@ -1120,7 +1090,7 @@
     badgeYellow_en: 'Bestseller', 
     badgeBlack_ar: 'شحن مجاني', 
     badgeBlack_en: 'Free Shipping', 
-    images: ['https://i.imgur.com/6CXrUba.jpeg'] 
+    images: ['https://i.imgur.com/6CXrUba.jpeg', 'https://s.click.aliexpress.com/e/_EyZ082k'] 
 },
 { 
     id: 140, category: 'بدلة اطفال',
@@ -1140,7 +1110,7 @@
     badgeYellow_en: 'Premium Quality', 
     badgeBlack_ar: 'الأكثر مبيعاً', 
     badgeBlack_en: 'Bestseller', 
-    images: ['https://i.imgur.com/Hg58KUM.jpeg'] 
+    images: ['https://i.imgur.com/Hg58KUM.jpeg', 'https://s.click.aliexpress.com/e/_EvAfNFa'] 
 },
 { 
     id: 146, category: 'جاكيت',
@@ -1160,7 +1130,7 @@
     badgeYellow_en: 'Superior Quality', 
     badgeBlack_ar: 'تصميم فاخر', 
     badgeBlack_en: 'Luxury Design', 
-    images: ['https://i.imgur.com/5tsGh1X.jpeg'] 
+    images: ['https://i.imgur.com/5tsGh1X.jpeg', 'https://s.click.aliexpress.com/e/_EucHv08'] 
 },
 { 
     id: 150, category: 'اكسسوارات',
@@ -1180,7 +1150,7 @@
     badgeYellow_en: 'European Design', 
     badgeBlack_ar: 'جودة ممتازة', 
     badgeBlack_en: 'Excellent Quality', 
-    images: ['https://i.imgur.com/I9uKqv8.jpeg'] 
+    images: ['https://i.imgur.com/I9uKqv8.jpeg', 'https://s.click.aliexpress.com/e/_EyTd2RW'] 
 },
 { 
     id: 151, category: 'مكياج',
@@ -1200,7 +1170,7 @@
     badgeYellow_en: 'Bestseller', 
     badgeBlack_ar: 'ترطيب عميق', 
     badgeBlack_en: 'Deep Hydration', 
-    images: ['https://i.imgur.com/2TUpDP6.jpeg'] 
+    images: ['https://i.imgur.com/2TUpDP6.jpeg', 'https://s.click.aliexpress.com/e/_Eyx7fRS'] 
 },
 { 
     id: 152, category: 'ساعات',
@@ -1220,7 +1190,7 @@
     badgeYellow_en: 'Superior Quality', 
     badgeBlack_ar: 'تصميم راقي', 
     badgeBlack_en: 'Elegant Design', 
-    images: ['https://i.imgur.com/iwFLbnj.jpeg'] 
+    images: ['https://i.imgur.com/iwFLbnj.jpeg', 'https://s.click.aliexpress.com/e/_Ex82PsM'] 
 },
 { 
     id: 153, category: 'ساعات',
@@ -1240,7 +1210,7 @@
     badgeYellow_en: 'Jewelry Quality', 
     badgeBlack_ar: 'إصدار محدود', 
     badgeBlack_en: 'Limited Edition', 
-    images: ['https://i.imgur.com/YxrskUX.jpeg'] 
+    images: ['https://i.imgur.com/YxrskUX.jpeg', 'https://s.click.aliexpress.com/e/_EQ5C20o'] 
 },
 { 
     id: 158, category: 'مكياج',
@@ -1259,7 +1229,7 @@
     badgeYellow_en: '24H Stay', 
     badgeBlack_ar: 'الأكثر مبيعاً', 
     badgeBlack_en: 'Bestseller', 
-    images: ['https://i.imgur.com/A5mqyt4.jpeg'] 
+    images: ['https://i.imgur.com/A5mqyt4.jpeg', 'https://s.click.aliexpress.com/e/_EQO01Cg'] 
 },
 { 
     id: 161, category: 'اكسسوارات',
@@ -1278,7 +1248,7 @@
     badgeYellow_en: 'Unique Design', 
     badgeBlack_ar: 'مناسبة للحفلات', 
     badgeBlack_en: 'Party Perfect', 
-    images: ['https://i.imgur.com/Bc9nv5M.jpeg'] 
+    images: ['https://i.imgur.com/Bc9nv5M.jpeg', 'https://s.click.aliexpress.com/e/_EzHIhfm'] 
 }
         ];
         
@@ -1330,34 +1300,6 @@
              localStorage.setItem('storedProducts', JSON.stringify(productsData));
         }
         
-        // 🚨 وظيفة تصدير البيانات الجديدة (الحل للمشكلة)
-        function exportProductsData() {
-            const dataToExport = productsData;
-            
-            // ترتيب البيانات لتبدو مرتبة في الملف المصدّر
-            const sortedData = dataToExport.slice().sort((a, b) => b.id - a.id);
-            
-            // طباعة كود جافاسكريبت جاهز للنسخ
-            const jsCode = `
-// 🚨 انتبه: هذه البيانات مُولّدة ويجب نسخها ولصقها في ملفك الأصلي بدلاً من ORIGINAL_PRODUCTS_DATA
-const UPDATED_PRODUCTS_DATA = ${JSON.stringify(sortedData, null, 4)};
-`;
-
-            console.log("=======================================================================");
-            console.log(currentLang === 'ar' ? "✅ كود المنتجات المُحدّث (انسخ ما بين الخطين أدناه) ✅" : "✅ UPDATED PRODUCTS CODE (Copy the content between the lines below) ✅");
-            console.log("=======================================================================");
-            console.log(jsCode);
-            console.log("=======================================================================");
-            
-            const alertMsg = currentLang === 'ar' 
-                ? '✅ تم طباعة كود المنتجات في وحدة التحكم (Console). قم بنسخه واستبدل به محتوى `ORIGINAL_PRODUCTS_DATA` في ملف HTML لتظهر المنتجات في كل مكان.'
-                : '✅ Product code printed in the Console. Copy it and replace the content of `ORIGINAL_PRODUCTS_DATA` in your HTML file to make products appear everywhere.';
-            
-            alert(alertMsg);
-            
-            closeNav();
-        }
-        
         // ------------------ وظائف إدارة اللغة ------------------
         
         function updateModalLabels() {
@@ -1385,9 +1327,6 @@ const UPDATED_PRODUCTS_DATA = ${JSON.stringify(sortedData, null, 4)};
                  messageLabelText: { ar: 'رسالتك:', en: 'Your Message:' },
                  contactMessage: { ar: 'أدخل رسالتك هنا...', en: 'Enter your message here...' },
                  sendText: { ar: 'إرسال', en: 'Send' },
-                 
-                 // زر التصدير
-                 exportDataText: { ar: 'تصدير بيانات المتجر', en: 'Export Store Data' }
             };
 
             for (const id in labels) {
@@ -1529,37 +1468,13 @@ const UPDATED_PRODUCTS_DATA = ${JSON.stringify(sortedData, null, 4)};
             }
         }
         
-        // ------------------ وظيفة حذف المنتج الجديدة 🚨 ------------------
-        function deleteProduct(productId) {
-            if (!confirm(currentLang === 'ar' ? `هل أنت متأكد من حذف المنتج رقم ${productId}؟ لا يمكن التراجع عن هذا الإجراء.` : `Are you sure you want to delete product ID ${productId}? This action cannot be undone.`)) {
-                return;
-            }
-
-            // 1. إزالة المنتج من المصفوفة
-            const initialLength = productsData.length;
-            productsData = productsData.filter(p => p.id !== productId);
-            
-            if (productsData.length === initialLength) {
-                alert(currentLang === 'ar' ? '🚫 فشل الحذف. لم يتم العثور على المنتج.' : '🚫 Deletion failed. Product not found.');
-                return;
-            }
-            
-            // 2. تحديث LocalStorage
-            saveProductsToLocalStorage(); 
-            
-            // 3. إعادة تحميل العرض
-            filterProducts(currentCategory); 
-            
-            alert(currentLang === 'ar' ? `✅ تم حذف المنتج رقم ${productId} بنجاح.` : `✅ Product ID ${productId} deleted successfully.`);
-        }
-
-
         // ------------------ وظيفة الإعجاب ------------------
         function toggleLike(productId) {
             const product = productsData.find(p => p.id === productId);
             const card = document.querySelector(`.product-card[data-product-id="${productId}"]`);
             if (!product || !card) return;
 
+            // استرجاع أحدث حالة إعجاب من localStorage
             let isLikedState = localStorage.getItem(`product_like_${productId}`) === 'true';
             let likesCountState = parseInt(localStorage.getItem(`product_likes_count_${productId}`)) || product.likesCount;
 
@@ -1745,6 +1660,7 @@ const UPDATED_PRODUCTS_DATA = ${JSON.stringify(sortedData, null, 4)};
             const productName = currentLang === 'ar' ? product.name_ar : product.name_en;
             const productSizes = currentLang === 'ar' ? product.sizes_ar : product.sizes_en;
             const productLink = currentLang === 'ar' ? product.link_ar : product.link_en; 
+            // استخدام رابط الصور المخصص إذا كان متوفراً (العنصر الثاني في مصفوفة الصور)
             const productImagesLink = product.images.length > 1 && product.images[1] ? product.images[1] : productLink; 
 
             const badgeYellow = currentLang === 'ar' 
@@ -1771,10 +1687,6 @@ const UPDATED_PRODUCTS_DATA = ${JSON.stringify(sortedData, null, 4)};
             const likeIcon = isLiked ? 'fas fa-heart' : 'far fa-heart';
 
             const safeProductName = encodeURIComponent(productName); 
-            
-            // 🚨 تحديد ما إذا كان المنتج مُضافاً حديثاً (من LocalStorage)
-            const isNewProduct = product.code && product.code.startsWith('NEW');
-            const deleteButtonStyle = isNewProduct ? 'display: block;' : 'display: none;';
             
             const card = `
                 <div class="product-card" data-product-id="${product.id}" data-category="${product.category}" dir="${currentLang === 'ar' ? 'rtl' : 'ltr'}">
@@ -1814,13 +1726,6 @@ const UPDATED_PRODUCTS_DATA = ${JSON.stringify(sortedData, null, 4)};
                             <button class="share-product-btn-footer" 
                                  onclick="copyProductLink(${product.id}, '${productLink}', '${safeProductName}')" aria-label="Share Link"> 
                                 <i class="fas fa-share-alt"></i>
-                            </button>
-                            
-                            <button class="delete-product-btn" 
-                                 onclick="deleteProduct(${product.id})" 
-                                 style="${deleteButtonStyle}" 
-                                 title="${currentLang === 'ar' ? 'حذف المنتج (خاص بالإدارة)' : 'Delete Product (Admin Only)'}"> 
-                                <i class="fas fa-trash"></i>
                             </button>
                             
                         </div>
@@ -1935,14 +1840,16 @@ const UPDATED_PRODUCTS_DATA = ${JSON.stringify(sortedData, null, 4)};
             const productLink = document.getElementById('productLink').value;
             const productImagesLink = document.getElementById('productImagesLink').value; 
             
-
+            // إيجاد أكبر ID موجود لضمان عدم التكرار حتى بعد إعادة تشغيل المتصفح
+            const maxId = productsData.length > 0 ? Math.max(...productsData.map(p => p.id)) : 0;
+            const newId = maxId + 1;
 
             const newProduct = {
-                id: nextProductId++, // استخدم الـ ID التالي
+                id: newId, 
                 category: categoryValue,
                 name_ar: productNameAr,
                 name_en: productNameEn, 
-                code: 'NEW' + (nextProductId - 1), // كود يبدأ بـ NEW لتمييز المنتجات المضافة محلياً
+                code: 'NEW' + newId, // كود يبدأ بـ NEW لتمييز المنتجات المضافة محلياً
                 price: productPrice,
                 rating: 5.0, 
                 soldCount: 0,
@@ -1977,14 +1884,6 @@ const UPDATED_PRODUCTS_DATA = ${JSON.stringify(sortedData, null, 4)};
                 : `✅ Product inserted successfully: ${newProduct.name_en}.`;
                 
             alert(successMsg);
-            
-            // 🚨 تذكير المستخدم بضرورة تحديث الملف الثابت لظهوره في كل مكان
-            const finalReminder = currentLang === 'ar' 
-                ? '🔔 تذكر: لكي يظهر هذا المنتج في متصفحات أخرى، يجب عليك النقر على زر "تصدير بيانات المتجر" في القائمة، ونسخ الكود ولصقه في `ORIGINAL_PRODUCTS_DATA` بملف HTML.'
-                : '🔔 Reminder: To make this product appear on other browsers, you must click the "Export Store Data" button in the menu, copy the code, and paste it into `ORIGINAL_PRODUCTS_DATA` in your HTML file.';
-                
-             console.log(finalReminder);
-             alert(finalReminder);
         }
         
         // وظيفة التحقق من كلمة المرور (Logic)
@@ -2036,30 +1935,44 @@ const UPDATED_PRODUCTS_DATA = ${JSON.stringify(sortedData, null, 4)};
             });
         }
         
-        // وظيفة جديدة: تحديد المنتجات المراد استخدامها
+        // 🚀 وظيفة جديدة: تحديد المنتجات المراد استخدامها (الحل المدمج)
         function determineInitialProducts() {
             const storedProducts = localStorage.getItem('storedProducts');
+            
+            let currentLocalProducts = [];
+            
             if (storedProducts) {
-                // استخدام المنتجات المخزنة إذا وجدت
                 try {
-                    productsData = JSON.parse(storedProducts);
-                    if (!Array.isArray(productsData)) {
+                    currentLocalProducts = JSON.parse(storedProducts);
+                    if (!Array.isArray(currentLocalProducts)) {
                          throw new Error("Stored data is not an array.");
                     }
-                    console.log(`✅ Loaded ${productsData.length} products from LocalStorage.`);
                 } catch (e) {
-                    // في حال حدوث خطأ في البيانات المخزنة، نعود للبيانات الأصلية
-                    console.error("Error loading stored products, using original data.", e);
-                    productsData = ORIGINAL_PRODUCTS_DATA.slice(); // استخدام نسخة من الثابت
+                    console.error("Error loading stored products, using original data as base.", e);
                 }
-            } else {
-                // استخدام المنتجات الأصلية الثابتة
-                productsData = ORIGINAL_PRODUCTS_DATA.slice();
-                // حفظها للتخزين الأولي لتبدأ في العمل
-                saveProductsToLocalStorage();
             }
             
-            // تحديد أكبر ID لضمان أن المنتج التالي لا يكرر المعرف
+            // 1. نبدأ بالقائمة الثابتة (ORIGINAL_PRODUCTS_DATA)
+            const combinedProducts = ORIGINAL_PRODUCTS_DATA.slice();
+            const existingIds = new Set(ORIGINAL_PRODUCTS_DATA.map(p => p.id));
+            
+            // 2. دمج المنتجات المُضافة محلياً: فقط أضف المنتجات التي ليس لها ID موجود في القائمة الثابتة
+            // (هذه هي المنتجات التي أضيفت عن طريق "إضافة منتج جديد" وتحمل أكواد تبدأ بـ NEW)
+            currentLocalProducts.forEach(localProduct => {
+                 // إضافة فقط إذا كان كودها يبدأ بـ 'NEW' ولا يوجد ID مماثل في القائمة الثابتة 
+                 if (localProduct.code && localProduct.code.startsWith('NEW') && !existingIds.has(localProduct.id)) {
+                    combinedProducts.push(localProduct);
+                 }
+            });
+
+            // تعيين القائمة المدمجة كبيانات أساسية للمتجر
+            productsData = combinedProducts; 
+            
+            // 3. إعادة حفظ القائمة المدمجة إلى LocalStorage
+            // هذا يضمن أن المتصفح الجديد سيجد القائمة الثابتة + أي إضافات سابقة قام بها المستخدم
+            saveProductsToLocalStorage();
+            
+            // 4. تحديد أكبر ID لضمان أن المنتج التالي لا يكرر المعرف
             const maxId = productsData.length > 0 ? Math.max(...productsData.map(p => p.id)) : 0;
             nextProductId = maxId + 1;
         }
@@ -2067,7 +1980,7 @@ const UPDATED_PRODUCTS_DATA = ${JSON.stringify(sortedData, null, 4)};
         // ------------------ وظيفة التهيئة الرئيسية (Final Initialization) ------------------
         function initializeStore() {
              
-             // 0. تحديد مصدر المنتجات (الذاكرة أو التخزين المحلي)
+             // 0. تحديد مصدر المنتجات (الذاكرة أو التخزين المحلي) - الخطوة الحاسمة الآن
              determineInitialProducts();
              
              const savedLang = localStorage.getItem('siteLang');
@@ -2082,9 +1995,6 @@ const UPDATED_PRODUCTS_DATA = ${JSON.stringify(sortedData, null, 4)};
              // 2. أحداث القائمة الجانبية (Sidebar)
              document.getElementById('openMenuBtn').addEventListener('click', openNav);
              document.getElementById('closeMenuBtn').addEventListener('click', closeNav);
-             
-             // 🚨 حدث زر التصدير الجديد 🚨
-             document.getElementById('exportDataBtn').addEventListener('click', exportProductsData);
              
              // 3. أحداث زر التواصل (Contact Button)
              const contactModal = document.getElementById('contactModal');
@@ -2131,7 +2041,6 @@ const UPDATED_PRODUCTS_DATA = ${JSON.stringify(sortedData, null, 4)};
              setupPasswordCheck();
              
              // 6. تحميل المنتجات الأولية واللغة
-             // يجب تعيين اللغة أولاً لضمان تحميل النصوص الصحيحة
              setLanguageAndReload(initialLang);
              filterProducts('all', false); // فلترة أولية دون إغلاق القائمة (في حال لم يتم فتحها)
         }
